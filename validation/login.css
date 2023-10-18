@@ -1,0 +1,17 @@
+/* login.css */
+body {
+    background-image: url("./Assets/login.jpeg"); /* Specify the path to your background image */
+    background-size: cover;
+    background-position: center;
+  }
+  .form-container {
+    backdrop-filter: blur(20px); /* Adjust the blur effect as needed */
+    border-radius: 10px; /* Optional: Add rounded corners to the container */
+    padding: 20px; /* Optional: Add padding to the container */
+  }
+  label {
+    font-size: 25px;
+  }
+  h1 {
+    font-size: 45px;
+  }

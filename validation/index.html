@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>REGISTER</title>
+    <link rel="stylesheet" href="style.css"
+    
+</head>
+<body>
+    <div class="container">
+        <div class="text-end">
+          <h5 style="color: orange; font-weight: bold">
+            Already Have Account? <i class="fa fa-arrow-down"></i>
+          </h5>
+          <a href='login.html'>
+            <button class="btn btn-primary">Login</button>
+          </a>
+        </div>
+    
+    <div class="container">
+       
+        <form id="form" class="form">
+            <h2>Register With Us</h2>
+            <div class="form-control">
+                <label for="username">Username</label>
+                <input type="text" id="username" placeholder="Enter Username">
+                <small>Error Message</small>
+            </div>
+            <div class="form-control">
+                <label for="email">Email</label>
+                <input type="text" id="email" placeholder="Enter email">
+                <small>Error Message</small>
+            </div>
+            <div class="form-control">
+                <label for="password">Password</label>
+                <input type="password" id="password" placeholder="Enter password">
+                <small>Error Message</small>
+            </div>
+            <div class="form-control">
+                <label for="password2">Confirm Password</label>
+                <input type="password" id="password2" placeholder="Enter password again">
+                <small>Error Message</small>
+            </div>
+            <div class="text-center mt-2">
+                <a href='login.html'>
+                    <button class="btn btn-primary">check
+                        in</button>
+                  </a>                </button>
+                <button
+                  type="submit"
+                  style="font-size: 25px"
+                  class="btn btn-success mt-2 btn-block">
+                  <a href='login.html'>Signup</a>
+                
+                  
+              </div>
+        </form>
+        
+        <script>
+            const form = document.getElementById('form');
+const username = document.getElementById('username');
+const email = document.getElementById('email');
+const password = document.getElementById('password');
+const password2 = document.getElementById('password2');
+
+//Show input error messages
+function showError(input, message) {
+    const formControl = input.parentElement;
+    formControl.className = 'form-control error';
+    const small = formControl.querySelector('small');
+    small.innerText = message;
+}
+
+//show success colour
+function showSucces(input) {
+    const formControl = input.parentElement;
+    formControl.className = 'form-control success';
+}
+
+//check email is valid
+function checkEmail(input) {
+    const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    if(re.test(input.value.trim())) {
+        showSucces(input)
+    }else {
+        showError(input,'Email is not invalid');
+    }
+}
+
+
+//checkRequired fields
+function checkRequired(inputArr) {
+    inputArr.forEach(function(input){
+        if(input.value.trim() === ''){
+            showError(input,`${getFieldName(input)} is required`)
+        }else {
+            showSucces(input);
+        }
+    });
+}
+
+
+//check input Length
+function checkLength(input, min ,max) {
+    if(input.value.length < min) {
+        showError(input, `${getFieldName(input)} must be at least ${min} characters`);
+    }else if(input.value.length > max) {
+        showError(input, `${getFieldName(input)} must be les than ${max} characters`);
+    }else {
+        showSucces(input);
+    }
+}
+
+//get FieldName
+function getFieldName(input) {
+    return input.id.charAt(0).toUpperCase() + input.id.slice(1);
+}
+
+// check passwords match
+function checkPasswordMatch(input1, input2) {
+    if(input1.value !== input2.value) {
+        showError(input2, 'Passwords do not match');
+    }
+}
+
+
+//Event Listeners
+form.addEventListener('submit',function(e) {
+    e.preventDefault();
+
+    checkRequired([username, email, password, password2]);
+    checkLength(username,3,15);
+    checkLength(password,6,25);
+    checkEmail(email);
+    checkPasswordMatch(password, password2);
+});
+
+
+        </script>
+        
+    </div>
+    <script src="signup.js"></script>
+</body>
+</html>
